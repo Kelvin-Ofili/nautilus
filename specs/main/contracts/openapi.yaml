@@ -1,0 +1,134 @@
+openapi: 3.1.0
+info:
+  title: Nautilus Portal API (Shareholder visibility MVP)
+  version: 0.1.0
+  description: >
+    Read-only shareholder holdings and distributions. All operations are scoped to the
+    authenticated user's tenant.
+servers:
+  - url: https://example.com/api
+    description: Replace with deployment host
+paths:
+  /holdings:
+    get:
+      summary: List holdings for the current portal user
+      operationId: listHoldings
+      security:
+        - sessionAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Holding"
+        "401":
+          description: Unauthenticated
+        "403":
+          description: Forbidden (tenant mismatch or policy)
+  /distributions:
+    get:
+      summary: List distributions for the current portal user
+      operationId: listDistributions
+      security:
+        - sessionAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Distribution"
+        "401":
+          description: Unauthenticated
+        "403":
+          description: Forbidden
+  /tenant/config:
+    get:
+      summary: Tenant display configuration (non-sensitive)
+      operationId: getTenantDisplayConfig
+      security:
+        - sessionAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TenantDisplayConfig"
+        "401":
+          description: Unauthenticated
+components:
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: cookie
+      name: session
+      description: Session cookie or equivalent; details implementation-specific.
+  schemas:
+    Holding:
+      type: object
+      required: [id, securityId, issuerName, symbol, quantity, asOfDate]
+      properties:
+        id:
+          type: string
+          format: uuid
+        securityId:
+          type: string
+          format: uuid
+        issuerName:
+          type: string
+        symbol:
+          type: string
+        quantity:
+          type: string
+          description: Decimal serialized as string
+        asOfDate:
+          type: string
+          format: date
+    Distribution:
+      type: object
+      required: [id, amount, currency, status]
+      properties:
+        id:
+          type: string
+          format: uuid
+        securityId:
+          type: string
+          format: uuid
+          nullable: true
+        amount:
+          type: string
+        currency:
+          type: string
+          minLength: 3
+          maxLength: 3
+        status:
+          type: string
+          enum: [declared, paid, unclaimed]
+        payDate:
+          type: string
+          format: date
+          nullable: true
+    TenantDisplayConfig:
+      type: object
+      required: [displayCurrency, locale]
+      properties:
+        displayCurrency:
+          type: string
+          example: NGN
+        locale:
+          type: string
+          example: en-NG

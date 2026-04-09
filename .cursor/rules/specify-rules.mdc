@@ -1,0 +1,46 @@
+﻿---
+description: Project Development Guidelines
+globs: ["**/*"]
+alwaysApply: true
+---
+# nautilus Development Guidelines
+
+Last updated: 2026-04-09
+
+## Active Technologies
+
+- **Portal**: TypeScript, Next.js (App Router) in `frontend/`
+- **API**: Python 3.11+, FastAPI in `backend/`
+- **Data**: In-memory repository (dev) with PostgreSQL-ready shapes; `DATABASE_URL` reserved for Postgres + SQLAlchemy/asyncpg
+- **Dev auth**: Header stub (`X-Dev-Tenant-Slug`, `X-Dev-User-Sub`) until OIDC is wired
+
+## Project Structure
+
+```text
+frontend/
+├── src/app/
+├── src/components/
+└── src/lib/api/
+
+backend/
+├── app/routers/
+├── app/repositories/
+└── tests/
+```
+
+## Commands
+
+- Portal: `cd frontend && npm run dev` / `npm run lint`
+- API: `cd backend && .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000` (or `python -m uvicorn` after `Activate.ps1`)
+- API tests: `cd backend && .\.venv\Scripts\python.exe -m pytest`
+
+## Code Style
+
+Tenant scope on every API read path; audit append-only for configured shareholder actions; avoid logging raw PII; constitution v1.1.0 polyglot boundaries documented in plans when UI and API split.
+
+## Recent Changes
+
+- main: Institutional portal UI; expanded `/api/*` (dashboard, securities, notices); `frontend/` path; constitution 1.1.0 polyglot + UX-inspiration rules
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->

@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'GeistSans';
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  }
+}
+
+:root {
+  /* AI-forward palette */
+  --dark: #0f0f1e;
+  --darker: #0a0a14;
+  --surface: #1a1a2e;
+  --surface-light: #252540;
+  --primary: #00d9ff;
+  --primary-dark: #00a8cc;
+  --accent: #a855f7;
+  --accent-light: #d946ef;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --text: #f0f0f0;
+  --text-secondary: #a0a0b0;
+  --border: #34344e;
+}
+
+* {
+  @apply transition-colors duration-200;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-gradient-to-br from-dark via-darker to-dark text-text min-h-screen;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-attachment: fixed;
+}
+
+/* Animated gradient background */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.bg-gradient-ai {
+  background: linear-gradient(-45deg, rgba(0, 217, 255, 0.1), rgba(168, 85, 247, 0.1), rgba(0, 168, 204, 0.1));
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Glass morphism */
+.glass {
+  @apply backdrop-blur-md bg-white/5 border border-white/10 rounded-2xl;
+}
+
+.glass-lg {
+  @apply glass shadow-2xl shadow-dark;
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+}
+
+.glow-accent {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+}
+
+/* Neural network pattern */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.portal-bg {
+  @apply bg-gradient-to-br from-dark via-darker to-dark;
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.font-serif-display {
+  font-family: 'Inter', serif;
+  @apply font-bold;
+}
+
+/* Modern button */
+.btn {
+  @apply px-6 py-2 rounded-lg font-semibold text-sm transition-all duration-300;
+}
+
+.btn-primary {
+  @apply btn bg-gradient-to-r from-primary to-primary-dark text-dark hover:shadow-lg hover:glow-primary hover:scale-105;
+}
+
+.btn-secondary {
+  @apply btn glass hover:bg-white/10;
+}
+
+/* Cards */
+.card {
+  @apply glass p-6 rounded-2xl;
+}
+
+.card-hover {
+  @apply card hover:bg-white/8 hover:border-primary/50 hover:shadow-lg;
+}
