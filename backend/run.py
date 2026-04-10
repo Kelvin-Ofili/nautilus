@@ -15,7 +15,8 @@ def find_available_port(start_port=8000, max_attempts=50):
                 return port
             except OSError:
                 continue
-    raise RuntimeError(f"No available ports found between {start_port} and {start_port + max_attempts}")
+    raise RuntimeError(
+        f"No available ports found between {start_port} and {start_port + max_attempts}")
 
 
 if __name__ == "__main__":
@@ -23,8 +24,9 @@ if __name__ == "__main__":
 
     port = find_available_port()
     print(f"🚀 Starting Nautilus backend on http://127.0.0.1:{port}")
-    print(f"   Make sure your frontend env has: VITE_API_URL=http://127.0.0.1:{port}")
-    
+    print(
+        f"   Make sure your frontend env has: VITE_API_URL=http://127.0.0.1:{port}")
+
     uvicorn.run(
         "app.main:app",
         host="127.0.0.1",

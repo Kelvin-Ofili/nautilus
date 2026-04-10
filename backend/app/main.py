@@ -11,11 +11,22 @@ from app.schemas import ErrorBody, ErrorResponse
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
 
-# Local dev: Only allow frontend port 3001. Tighten in production to known portal URLs.
+# Local dev: Allow frontend on Vite dev ports
 _cors_origins = [
     "http://127.0.0.1:3001",
     "http://localhost:3001",
     "http://[::1]:3001",
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+    "http://127.0.0.1:5174",
+    "http://localhost:5174",
+    "http://127.0.0.1:5175",
+    "http://localhost:5175",
+    "http://127.0.0.1:5176",
+    "http://localhost:5176",
+    "http://127.0.0.1:5177",
+    "http://localhost:5177",
+    "http://[::1]:5173",
 ]
 _cors_extra = [o.strip()
                for o in settings.cors_extra_origins.split(",") if o.strip()]

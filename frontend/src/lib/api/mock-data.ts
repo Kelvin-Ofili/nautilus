@@ -26,7 +26,7 @@ export const mockMeAlice: PortalMe = {
   display_name: "Alice A.",
   shareholder_ref: "shr-alpha-alice",
   tenant_slug: "alpha",
-  tenant_name: "Registrar Alpha Ltd",
+  tenant_name: "SavvyBee Ltd",
 };
 
 export const mockSummaryAlice: PortalSummary = {

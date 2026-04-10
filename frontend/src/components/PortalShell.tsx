@@ -157,8 +157,3 @@ export function PortalShell({ children }: PortalShellProps) {
     </div>
   );
 }
-        </div>
-      </footer>
-    </div>
-  );
-}

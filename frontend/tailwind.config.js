@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
@@ -7,14 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: '#0c1929',
-        'navy-mid': '#132a45',
-        gold: '#c4a35a',
-        'gold-dim': '#9a7b3a',
-        cream: '#f7f5f0',
-        paper: '#fdfcfa',
-        muted: '#5c6b7a',
-        line: '#e2ddd3',
+        primary: '#00d9ff',
+        'primary-dark': '#00a8cc',
+        accent: '#a855f7',
+        'accent-light': '#d946ef',
       },
     },
   },

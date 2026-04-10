@@ -187,17 +187,17 @@ def _seed() -> MemoryStore:
     t_alpha = TenantRow(
         id=uuid4(),
         slug="alpha",
-        name="Registrar Alpha Ltd",
+        name="SavvyBee Ltd",
         config={
             "displayCurrency": "USD",
             "locale": "en-US",
             "tagline": "Clarity for shareholders. Integrity in every register.",
-            "supportEmail": "shareholder.services@registrar-alpha.example",
-            "supportPhone": "+1 (555) 010-0199",
-            "addressLine": "1200 Capital Square, New York, NY 10004",
+            "supportEmail": "shareholder.services@savvybee.example",
+            "supportPhone": "+2347052640276",
+            "addressLine": "10, Victor Bamiro Street, Alapere, Lagos, Nigeria",
             "regulatoryNote": "Information is provided for convenience only and does not constitute "
             "investment, tax, or legal advice. Confirm material matters with your professional "
-            "advisers. Nautilus demo data — not affiliated with any external brand.",
+            "advisers. SavvyBee demo data — not affiliated with any external brand.",
         },
     )
     t_beta = TenantRow(

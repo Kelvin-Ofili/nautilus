@@ -214,8 +214,7 @@ export default function DashboardPage() {
         </a>
         <a
           href="/securities"
-          className="btn-secondary hover:border-accent/50"
-        >
+          className="btn-secondary hover:border-accent/50">
           → Securities
         </a>
       </section>
