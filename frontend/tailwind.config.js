@@ -7,10 +7,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#00d9ff',
-        'primary-dark': '#00a8cc',
-        accent: '#a855f7',
-        'accent-light': '#d946ef',
+        primary: '#0066ff',
+        'primary-light': '#0066ff',
+        success: '#16a34a',
+        warning: '#ea580c',
+        error: '#dc2626',
+      },
+      borderColor: {
+        DEFAULT: '#e5e7eb',
       },
     },
   },

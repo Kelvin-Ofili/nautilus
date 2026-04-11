@@ -46,9 +46,9 @@ export default function DashboardPage() {
 
   if (error) {
     return (
-      <div className="card border-error/50 bg-error/10">
-        <p className="text-error font-semibold">⚠️ Error loading dashboard</p>
-        <p className="text-text-secondary text-sm mt-2">{error}</p>
+      <div className="card border border-red-200 bg-red-50 max-w-2xl mx-auto">
+        <p className="text-red-900 font-semibold">Error loading dashboard</p>
+        <p className="text-red-700 text-sm mt-1">{error}</p>
       </div>
     );
   }
@@ -57,10 +57,10 @@ export default function DashboardPage() {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
-          <div className="inline-block">
-            <div className="w-8 h-8 border-3 border-primary/20 border-t-primary rounded-full animate-spin mb-4"></div>
+          <div className="inline-block mb-3">
+            <div className="w-7 h-7 border-2 border-gray-200 border-t-primary rounded-full animate-spin"></div>
           </div>
-          <p className="text-text-secondary">🧠 AI is analyzing your portfolio…</p>
+          <p className="text-gray-600 text-sm">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -73,62 +73,43 @@ export default function DashboardPage() {
   );
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       {/* Welcome section */}
-      <section className="relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/10 to-primary-dark/20 rounded-2xl blur-3xl opacity-50 -z-10"></div>
-        <div className="card bg-gradient-to-br from-surface-light/60 to-surface/30 border-primary/30">
-          <div className="flex items-start justify-between gap-4 mb-4">
-            <div>
-              <h2 className="font-serif-display text-4xl bg-gradient-to-r from-primary via-accent-light to-primary bg-clip-text text-transparent">
-                Welcome back{displayName(me)}
-              </h2>
-              <p className="text-text-secondary mt-3 max-w-2xl">
-                Your intelligent portfolio dashboard powered by AI analytics. <br />
-                <span className="text-xs">Registrar records for <strong>{me.tenant_name}</strong></span>
-              </p>
-            </div>
-            <div className="text-5xl">📊</div>
-          </div>
-          <div className="pt-4 border-t border-border/50 mt-4">
-            <p className="text-text-secondary text-xs">
-              <span className="text-primary font-semibold">Investor ID:</span> <span className="font-mono bg-surface/50 px-2 py-1 rounded">{me.shareholder_ref}</span>
-            </p>
-          </div>
-        </div>
+      <section>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">
+          Welcome back{displayName(me)}
+        </h1>
+        <p className="text-gray-600 text-sm mb-4">
+          Here\'s an overview of your portfolio with {cfg.firm_legal_name}.
+        </p>
+        <p className="text-xs text-gray-500">
+          <span className="font-semibold">Investor ID:</span> {me.shareholder_ref}
+        </p>
       </section>
 
       {/* Key metrics */}
       <section>
-        <h3 className="text-text-secondary text-xs font-bold uppercase tracking-widest mb-4">🎯 Portfolio Overview</h3>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <h2 className="text-sm font-semibold text-gray-900 mb-4">Portfolio Overview</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <StatCard
-            label="Active Holdings"
+            label="Holdings"
             value={summary.holdings_count}
-            icon="💼"
-            hint={`${summary.as_of}`}
-            gradient="primary"
+            hint={`As of ${summary.as_of}`}
           />
           <StatCard
             label="Issuers"
             value={summary.distinct_securities_count}
-            icon="🏢"
-            hint="Unique securities"
-            gradient="accent"
+            hint="Active securities"
           />
           <StatCard
             label="Distributions"
             value={summary.distributions_count}
-            icon="💵"
-            hint="Historical events"
-            gradient="success"
+            hint="Historical"
           />
           <StatCard
             label="YTD Paid"
             value={ytdFormatted}
-            icon="📈"
             hint={summary.last_distribution_pay_date ? `Last: ${summary.last_distribution_pay_date}` : "N/A"}
-            gradient="warning"
           />
         </div>
       </section>
@@ -137,27 +118,24 @@ export default function DashboardPage() {
       <div className="grid lg:grid-cols-3 gap-6">
         {/* Notices - larger */}
         <section className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="text-text-secondary text-xs font-bold uppercase tracking-widest">
-              📬 Shareholder Updates
-            </h3>
-            <a href="/notices" className="text-primary text-sm font-semibold hover:text-primary-dark transition-colors">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold text-gray-900">Recent Updates</h2>
+            <a href="/notices" className="text-primary text-xs font-semibold hover:text-blue-700">
               View all →
             </a>
           </div>
-          <div className="space-y-3">
-            {notices.slice(0, 4).map((n) => (
-              <div key={n.id} className="card-hover group cursor-pointer">
+          <div className="space-y-2">
+            {notices.slice(0, 5).map((n) => (
+              <div key={n.id} className="card-hover cursor-pointer">
                 <div className="flex gap-3">
-                  <span className="text-xl">📄</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-text font-semibold group-hover:text-primary transition-colors">
+                    <p className="text-sm font-semibold text-gray-900 hover:text-primary transition-colors">
                       {n.title}
                     </p>
-                    <p className="text-text-secondary text-sm mt-1 line-clamp-2">
+                    <p className="text-xs text-gray-600 mt-1 line-clamp-2">
                       {n.body}
                     </p>
-                    <p className="text-primary/60 text-xs mt-2 group-hover:text-primary/80 transition-colors">
+                    <p className="text-xs text-gray-400 mt-2">
                       {new Date(n.published_at).toLocaleDateString(cfg.locale, {
                         month: 'short',
                         day: 'numeric',
@@ -173,17 +151,15 @@ export default function DashboardPage() {
 
         {/* Recent activity */}
         <section>
-          <h3 className="text-text-secondary text-xs font-bold uppercase tracking-widest mb-5">
-            ⚡ Activity Log
-          </h3>
+          <h2 className="text-sm font-semibold text-gray-900 mb-4">Activity</h2>
           <div className="card">
             <div className="space-y-3 max-h-80 overflow-y-auto">
               {activity.slice(0, 10).map((a, i) => (
-                <div key={`${a.created_at}-${i}`} className="pb-3 border-b border-border/50 last:border-0">
-                  <p className="text-text/80 text-xs font-mono font-semibold uppercase text-primary">
+                <div key={`${a.created_at}-${i}`} className="pb-3 border-b border-gray-200 last:border-0">
+                  <p className="text-xs font-mono font-semibold text-gray-600 uppercase">
                     {a.action}
                   </p>
-                  <p className="text-text-secondary text-xs mt-1">
+                  <p className="text-xs text-gray-500 mt-1">
                     {new Date(a.created_at).toLocaleString(cfg.locale, {
                       month: 'short',
                       day: 'numeric',
@@ -200,29 +176,21 @@ export default function DashboardPage() {
 
       {/* Action buttons */}
       <section className="flex flex-wrap gap-3">
-        <a
-          href="/holdings"
-          className="btn-primary group"
-        >
-          💼 Review Holdings
+        <a href="/holdings" className="btn btn-primary">
+          Review Holdings
         </a>
-        <a
-          href="/distributions"
-          className="btn-secondary hover:border-primary/50"
-        >
-          → Distribution History
+        <a href="/distributions" className="btn btn-secondary">
+          Distribution History
         </a>
-        <a
-          href="/securities"
-          className="btn-secondary hover:border-accent/50">
-          → Securities
+        <a href="/securities" className="btn btn-secondary">
+          Securities
         </a>
       </section>
 
       {/* Footer note */}
-      <section className="text-center py-6 border-t border-border/50">
-        <p className="text-text-secondary text-xs max-w-2xl mx-auto">
-          ℹ️ This portal reflects <strong>registrar records</strong> only. For investment decisions, consult your professional advisers. All data is encrypted and secure.
+      <section className="border-t border-gray-200 pt-6">
+        <p className="text-gray-600 text-xs max-w-2xl">
+          This portal reflects registrar records only. For investment decisions, consult your professional advisers.
         </p>
       </section>
     </div>

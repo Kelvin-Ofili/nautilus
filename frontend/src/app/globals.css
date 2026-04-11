@@ -8,149 +8,45 @@
   }
 
   body {
-    @apply min-h-screen text-gray-100;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(to bottom right, rgb(15, 15, 30), rgb(10, 10, 20), rgb(15, 15, 30));
-    background-attachment: fixed;
+    @apply bg-white text-gray-900;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
 
   * {
-    @apply transition-colors duration-200;
+    @apply transition-colors duration-150;
   }
 }
 
 @layer components {
-  /* Glass morphism */
-  .glass {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
+  /* Cards - clean minimal style */
+  .card {
+    @apply bg-white border border-gray-200 rounded-lg p-6;
+  }
+
+  .card-hover {
+    @apply bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-300 hover:shadow-sm transition-all;
   }
 
   /* Buttons */
   .btn {
-    @apply px-6 py-2 rounded-lg font-semibold text-sm transition-all duration-300 cursor-pointer border-0;
+    @apply px-4 py-2 rounded-md font-medium text-sm transition-all duration-150 cursor-pointer;
   }
 
   .btn-primary {
-    padding: 0.5rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    font-size: 0.875rem;
-    background: linear-gradient(to right, rgb(0, 217, 255), rgb(0, 168, 204));
-    color: rgb(15, 15, 30);
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s;
-  }
-
-  .btn-primary:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(0, 217, 255, 0.4);
+    @apply bg-primary text-white hover:bg-blue-700 active:bg-blue-800;
   }
 
   .btn-secondary {
-    padding: 0.5rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    font-size: 0.875rem;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgb(243, 244, 246);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  /* Cards */
-  .card {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 1.5rem;
-  }
-
-  .card-hover {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
-    padding: 1.5rem;
-  }
-
-  .card-hover:hover {
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-    border-color: rgba(0, 217, 255, 0.5);
+    @apply bg-gray-100 text-gray-900 hover:bg-gray-200 border border-gray-200;
   }
 
   /* Portal background */
   .portal-bg {
-    position: relative;
-    overflow: hidden;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(to bottom right, rgb(15, 15, 30), rgb(10, 10, 20), rgb(15, 15, 30));
-  }
-
-  .portal-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
-    z-index: 0;
+    @apply relative overflow-hidden min-h-screen flex flex-col bg-gray-50;
   }
 
   /* Typography */
   .font-serif-display {
-    @apply font-bold;
-    font-family: 'Inter', serif;
+    @apply font-semibold;
   }
-
-  /* Glow effects */
-  .glow-primary {
-    box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
-  }
-
-  .glow-accent {
-    box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
-  }
-}
-
-@layer utilities {
-  /* Animations */
-  @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-  }
-
-  .bg-gradient-ai {
-    background: linear-gradient(-45deg, rgba(0, 217, 255, 0.1), rgba(168, 85, 247, 0.1), rgba(0, 168, 204, 0.1));
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-  }
-
-  .pulse-glow {
-    animation: pulse-glow 3s ease-in-out infinite;
-  }
-
-  /* Custom text colors */
-  .text-primary { color: #00d9ff; }
-  .text-accent { color: #a855f7; }
-  .text-text-secondary { color: rgb(160, 160, 176); }
-  .opacity-80 { opacity: 0.8; }
 }
