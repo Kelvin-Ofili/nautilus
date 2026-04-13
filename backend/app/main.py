@@ -24,7 +24,7 @@ for port in range(5173, 5181):
         f"http://localhost:{port}",
     ])
 _cors_origins.append("http://[::1]:5173")
-_cors_extra = [o.strip()
+_cors_extra = [o.strip().rstrip('/') 
                for o in settings.cors_extra_origins.split(",") if o.strip()]
 _cors_origins.extend(_cors_extra)
 
