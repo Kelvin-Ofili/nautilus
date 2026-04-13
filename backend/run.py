@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Find available port and start Uvicorn server."""
 
+import os
 import socket
 import sys
 from contextlib import closing
@@ -22,14 +23,24 @@ def find_available_port(start_port=8000, max_attempts=50):
 if __name__ == "__main__":
     import uvicorn
 
-    port = find_available_port()
-    print(f"🚀 Starting Nautilus backend on http://127.0.0.1:{port}")
-    print(
-        f"   Make sure your frontend env has: VITE_API_URL=http://127.0.0.1:{port}")
+    # Production: use PORT env var from Railway/hosting provider, bind to 0.0.0.0
+    # Local: auto-discover port, bind to 127.0.0.1
+    if "PORT" in os.environ:
+        port = int(os.environ["PORT"])
+        host = "0.0.0.0"
+        print(f"🚀 Starting Nautilus backend on 0.0.0.0:{port} (production mode)")
+        reload = False
+    else:
+        port = find_available_port()
+        host = "127.0.0.1"
+        print(f"🚀 Starting Nautilus backend on http://127.0.0.1:{port}")
+        print(
+            f"   Make sure your frontend env has: VITE_API_URL=http://127.0.0.1:{port}")
+        reload = True
 
     uvicorn.run(
         "app.main:app",
-        host="127.0.0.1",
+        host=host,
         port=port,
-        reload=True,
+        reload=reload,
     )
