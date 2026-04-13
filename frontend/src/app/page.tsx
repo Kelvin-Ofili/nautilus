@@ -80,7 +80,7 @@ export default function DashboardPage() {
           Welcome back{displayName(me)}
         </h1>
         <p className="text-gray-600 text-sm mb-4">
-          Here\'s an overview of your portfolio with {cfg.firm_legal_name}.
+          Here is an overview of your portfolio with {cfg.firm_legal_name}.
         </p>
         <p className="text-xs text-gray-500">
           <span className="font-semibold">Investor ID:</span> {me.shareholder_ref}
