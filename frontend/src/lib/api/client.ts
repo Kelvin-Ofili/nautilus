@@ -32,7 +32,10 @@ function devHeaders(): HeadersInit {
 }
 
 async function apiGet<T>(path: string): Promise<T> {
-  const base = import.meta.env.VITE_API_URL ?? "http://127.0.0.1:8001";
+  // Priority: window.VITE_API_URL (runtime) → build-time env var → localhost default
+  const base = (typeof window !== "undefined" && (window as any).VITE_API_URL) ||
+    import.meta.env.VITE_API_URL ||
+    "http://127.0.0.1:8001";
   const res = await fetch(`${base}${path}`, {
     headers: {
       Accept: "application/json",
