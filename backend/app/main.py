@@ -28,6 +28,11 @@ _cors_extra = [o.strip()
                for o in settings.cors_extra_origins.split(",") if o.strip()]
 _cors_origins.extend(_cors_extra)
 
+print(f"🔒 CORS Configuration:")
+print(f"   Local origins: {len(_cors_origins) - len(_cors_extra)}")
+print(f"   Extra origins from env: {_cors_extra}")
+print(f"   Total allowed origins: {len(_cors_origins)}")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=_cors_origins,
